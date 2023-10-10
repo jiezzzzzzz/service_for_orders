@@ -16,7 +16,6 @@ def register(request):
             return HttpResponseRedirect(reverse('login'))
     else:
         form = UserRegisterForm()
-        return HttpResponseRedirect(reverse('home'))
     return render(request, 'users/register.html', {'form': form})
 
 
