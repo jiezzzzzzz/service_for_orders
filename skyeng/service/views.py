@@ -1,11 +1,12 @@
+from django.views import View
 from django.shortcuts import render
-from .models import Product
-from django.contrib.auth.decorators import login_required
+from .models import Order
 
 
-@login_required()
-def orders(request):
-    orders = Product.objects.all()
-    context = {'orders': orders}
-    return render(request, 'service/index.html', context)
+class OrdersView(View):
+    def get(self, request):
+        orders = Order.objects.all()
+        context = {'orders': orders}
+        if request.user.is_authenticated:
+            return render(request, 'service/index.html', context)
 
